@@ -339,8 +339,8 @@ def main(room="kitchen",api_link="http://109.237.25.161/particle/measurements?de
     add_day_night(df_activity,sunrise,sunset)
     
     
-    df_activity.to_csv("calculated_activity_{}.csv".format(room), na_rep=np.nan)
-    df_all.to_csv("data_thresholded_{}.csv".format(room), na_rep=np.nan)
+    df_activity.to_csv("calculated_activity_{}.csv".format(room), na_rep=np.nan, index_label='Timestamp')
+    df_all.to_csv("data_thresholded_{}.csv".format(room), na_rep=np.nan, index_label='Timestamp')
     
     return df_activity
     
