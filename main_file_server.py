@@ -20,45 +20,6 @@ def get_link():
 
     return link
 
-def line_plot(df_k,df_l):
-    levels = df_k.columns.values
-    lev_cols = {
-        "day_night":"slategray",
-        "down_time":"lightgray",
-        
-        "day_high":"orange",
-        "day_low":"wheat",
-        "night_high":"lightcyan",
-        "night_low":"paleturquoise"
-    }
-    hfmt = mdates.DateFormatter('%d/%m %H:%M') #display format of date
-    
-    fig, axs = plt.subplots(2, 1, sharex=True, figsize=(10,5))
-    
-    proxys=[]
-    for i in range(len(levels)):
-        axs[0].fill_between(df_k.index,0,df_k[levels[i]].values,color=lev_cols[levels[i]],alpha=1)
-        axs[1].fill_between(df_l.index,0,df_l[levels[i]].values,color=lev_cols[levels[i]],alpha=1)
-        proxys.append(plt.Rectangle((0,0),0,0,facecolor=lev_cols[levels[i]],edgecolor="black",label=levels[i]))
-
-    axs[0].xaxis.set_major_locator(mdates.HourLocator(tz=timezone("Europe/London")))
-    axs[0].xaxis.set_major_formatter(hfmt)
-    
-    axs[0].set_ylim(0,1)
-    axs[1].set_ylim(0,1)
-
-    axs[0].yaxis.set_visible(False)
-    axs[1].yaxis.set_visible(False)
-    
-    axs[0].set_title("Kitchen")
-    axs[1].set_title("Living Room")
-
-    
-    fig.legend(handles=proxys,labels=levels)
-    
-    fig.autofmt_xdate()
-    fig.show()
-
 def main():
     
     link = get_link()
@@ -67,6 +28,5 @@ def main():
     living_room = data_analysis_server.main(room="living_room",api_link=link)
     
 
-# call main
 if __name__ == '__main__':
     main()
