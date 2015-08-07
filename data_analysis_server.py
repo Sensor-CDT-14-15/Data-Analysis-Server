@@ -324,7 +324,7 @@ def main(room="kitchen",api_link="http://109.237.25.161/particle/measurements?de
     #MAKE RANDOM POWER MONITOR DATA
     #power = random_data(n=3,duration=1,name=['power_mon'])
     
-    #MAP POWER AND DOOR DATA TO TRESHOLDED DATA
+    #MAP POWER AND DOOR DATA TO THRESHOLDED DATA
     if room=="kitchen":
         df_all = add_devices(df_tresh,door,power[["power_on_off"]])
     else:
@@ -340,7 +340,7 @@ def main(room="kitchen",api_link="http://109.237.25.161/particle/measurements?de
     
     
     df_activity.to_csv("calculated_activity_{}.csv".format(room), na_rep=np.nan)
-    df_all.to_csv("data_tresholded_{}.csv".format(room), na_rep=np.nan)
+    df_all.to_csv("data_thresholded_{}.csv".format(room), na_rep=np.nan)
     
     return df_activity
     
