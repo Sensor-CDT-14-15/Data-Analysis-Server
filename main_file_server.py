@@ -53,7 +53,6 @@ def line_plot(df_k,df_l):
     axs[0].set_title("Kitchen")
     axs[1].set_title("Living Room")
 
-    #axs[0].set_xlim("2015-08-03 00:00","2015-08-04 13:15")
     
     fig.legend(handles=proxys,labels=levels)
     
@@ -67,11 +66,6 @@ def main():
     kitchen = data_analysis_server.main(room="kitchen",api_link=link)
     living_room = data_analysis_server.main(room="living_room",api_link=link)
     
-    #print kitchen.tail(), "\n", living_room.tail()
-    #line_plot(kitchen,living_room)
-    
-    #print "Hit Enter to exit..."
-    #raw_input()
 
 # call main
 if __name__ == '__main__':

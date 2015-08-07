@@ -32,7 +32,6 @@ def load_data(device,parameters,api_link):
 
 def add_devices(*data):
     result = pd.concat([frame for frame in data],axis=0,join='outer').sort_index()
-    #result = pd.concat([frame for frame in data],axis=1,join='outer')
     
     for name in ["power1","power2","door"]:
         try:
@@ -75,7 +74,6 @@ def norm_data(df,min_max,cols):
     
     for i in range(len(var)):
         norm_sig[:,i] = (df[var[i]]-min_max[var[i]][0])/(min_max[var[i]][1]-min_max[var[i]][0])
-        #print "For this selection, the min and max of {0} are {1:.2} and {2:.2} respectively.".format(var[i], np.nanmin(df[var[i]].values), np.nanmax(df[var[i]].values))
 
     print "\n"
     print "The signals were normalised.\n"
@@ -139,9 +137,7 @@ def plot_data(df,hfmt,cols,title="Plot",plt_type="line",**kwargs):
             pass
     
     fig.autofmt_xdate()
-    #fig.tight_layout()
     fig.show()
-    #fig.savefig(title,orientation="landscape")
 
 def line_plot(df,df_act,hfmt,cols):
     var = df.columns.values
@@ -173,7 +169,6 @@ def line_plot(df,df_act,hfmt,cols):
     axs[0].xaxis.set_major_formatter(hfmt)
     axs[0].set_ylim(0,1)
     axs[0].yaxis.set_visible(False)
-    #axs[0].set_xlim("2015-08-05 14:00","2015-08-05 18:00")
     
     fig.autofmt_xdate()
     fig.show()
@@ -343,17 +338,6 @@ def main(room="kitchen",api_link="http://109.237.25.161/particle/measurements?de
     add_down_time(df,df_activity)
     add_day_night(df_activity,sunrise,sunset)
     
-    #MAKE PLOTS
-    #plot_data(df,hfmt,cols,title="Raw data")
-    #plot_data(df_filt,hfmt,cols,title="Gauss filtered data")
-    #plot_data(df_norm,hfmt,cols,title="Normalised data",ylim=(0,1))
-    #plot_data(df_tresh,hfmt,cols,title="Tresholded data",plt_type="fill",ylim=(0,1))
-    #plot_data(df_all,hfmt,cols,title="Including power-monitor and door",plt_type="fill",ylim=(0,1))
-    
-    #line_plot(df_all,df_activity,hfmt,cols)
-    
-    #print "Hit Enter to continue..."
-    #raw_input()
     
     df_activity.to_csv("calculated_activity_{}.csv".format(room), na_rep=np.nan)
     df_all.to_csv("data_tresholded_{}.csv".format(room), na_rep=np.nan)
