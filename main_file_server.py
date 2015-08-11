@@ -27,6 +27,7 @@ def main():
     kitchen = data_analysis_server.main(room="kitchen",api_link=link)
     living_room = data_analysis_server.main(room="living_room",api_link=link)
     
+    execfile("parse_csvs.py")
 
 if __name__ == '__main__':
     main()
